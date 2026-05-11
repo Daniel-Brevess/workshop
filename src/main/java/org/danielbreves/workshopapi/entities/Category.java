@@ -1,5 +1,6 @@
 package org.danielbreves.workshopapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category() {
@@ -44,6 +46,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public Set<Product> getProducts() {
         return products;
     }
